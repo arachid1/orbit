@@ -20,13 +20,17 @@ services:
     
   orbit_frontend:
     container_name: orbit_frontend
-    build: ./orbit_frontend
+    # build: ./orbit_frontend
+    build:
+      context: .
+      dockerfile: orbit_frontend/Dockerfile
     command: node server.mjs
     env_file: ./orbit_frontend/.env.local
     environment:
       - NODE_OPTIONS=--max-old-space-size=8192
     volumes:
       - ./orbit_frontend:/app   
+      - ./shared_frontend:/shared_frontend
       - /app/node_modules       # avoid overwriting node_modules
       - ./certs:/certs
     ports:
