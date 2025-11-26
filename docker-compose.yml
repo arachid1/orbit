@@ -70,7 +70,10 @@ services:
       - "6379:6379"
 
   novaword_frontend:
-    build: ./novaword/novaword_frontend
+    build:
+      context: .
+      dockerfile: novaword/novaword_frontend/Dockerfile
+    # build: ./novaword/novaword_frontend
     container_name: novaword_frontend
     command: node server.mjs
     ports:
@@ -80,6 +83,7 @@ services:
       - ./novaword/novaword_frontend:/app
       - /app/node_modules 
       - ./novaword/certs:/certs:ro
+      - ./shared_frontend:/shared_frontend
     networks:
       - orbitnet
 

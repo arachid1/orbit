@@ -3,6 +3,7 @@ orbit_frontend/
 novaword/
 certs/
 pgdata/
+nginx/mkcert-rootCA.crt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
