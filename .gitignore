@@ -3,7 +3,6 @@ orbit_frontend/
 novaword/
 certs/
 pgdata/
-nginx
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
