@@ -9,21 +9,15 @@ services:
     restart: always
     command: >
       bash -c "sleep 5 && gunicorn orbit_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120"
-    # command: >
-    #   bash -c "sleep 5 && python manage.py runserver_plus --cert-file /certs/orbitlearning.local.pem --key-file /certs/orbitlearning.local-key.pem 0.0.0.0:8000"
     volumes:
       - ./orbit_backend:/app    
       - ./certs:/certs
     ports:
       - "8000:8000"
     depends_on: [orbit_db, orbit_redis]
-    # depends_on:
-    #   - orbit_db
     networks:
       - orbitnet
     
-
-
   orbit_frontend:
     container_name: orbit_frontend
     build: ./orbit_frontend
@@ -58,7 +52,6 @@ services:
     networks:
       - orbitnet
 
-
   orbit_db:
     container_name: orbit_db
     image: postgres:15
@@ -75,6 +68,20 @@ services:
     restart: always
     ports:
       - "6379:6379"
+
+  novaword_frontend:
+    build: ./novaword/novaword_frontend
+    container_name: novaword_frontend
+    command: node server.mjs
+    ports:
+      - "3001:3000"
+    env_file: ./novaword/novaword_frontend/.env.local
+    volumes:
+      - ./novaword/novaword_frontend:/app
+      - /app/node_modules 
+      - ./novaword/certs:/certs:ro
+    networks:
+      - orbitnet
 
 
 volumes:
