@@ -17,12 +17,15 @@ export default function SignInForm() {
         }
     }
 
+    const inputClass =
+        "p-2 rounded text-white bg-white/5 border border-[#FFD700]/30 placeholder-white/50 focus:border-[#FFD700] outline-none"
+
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input name="username" placeholder="Username" className="p-2 rounded bg-[#2F4F3E]" onInput={() => setError(null)} />
-            <input type="password" name="password" placeholder="Password" className="p-2 rounded bg-[#2F4F3E]" onInput={() => setError(null)} />
+            <input name="username" placeholder="Username" className={inputClass} onInput={() => setError(null)} />
+            <input type="password" name="password" placeholder="Password" className={inputClass} onInput={() => setError(null)} />
             {error && (
-                <p className="text-red-500 text-sm -mt-2">{error}</p>
+                <p className="text-red-400 text-sm -mt-2">{error}</p>
             )}
             <button type="submit" className="bg-[#FFD700] text-black py-2 rounded">Sign In</button>
         </form>

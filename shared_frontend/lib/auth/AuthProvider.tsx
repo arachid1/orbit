@@ -65,7 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         if (me) {
             setUser(me)
-            router.push("/dashboard")
+            // router.push("/dashboard")
         } else {
             throw new Error("Failed to retrieve user after login")
         }

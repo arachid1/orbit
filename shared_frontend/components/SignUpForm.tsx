@@ -24,7 +24,6 @@ export default function SignUpForm() {
 
         try {
             await signUp(first_name, last_name, username, email, password, re_password, date_of_birth)
-            // success → redirect handled by AuthProvider
         } catch (err) {
             setError((err as Error).message)
         } finally {
@@ -32,33 +31,20 @@ export default function SignUpForm() {
         }
     }
 
+    const inputClass =
+        "p-2 rounded text-white bg-white/5 border border-[#FFD700]/30 placeholder-white/50 focus:border-[#FFD700] outline-none"
+
     return (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <input
-                name="first_name"
-                placeholder="First name"
-                className="p-2 rounded bg-[#2F4F3E] text-white"
-            />
-            <input
-                name="last_name"
-                placeholder="Last name"
-                className="p-2 rounded bg-[#2F4F3E] text-white"
-            />
-            <input
-                name="username"
-                placeholder="Username"
-                className="p-2 rounded bg-[#2F4F3E] text-white"
-            />
-            <input
-                name="email"
-                placeholder="Email"
-                className="p-2 rounded bg-[#2F4F3E] text-white"
-            />
+            <input name="first_name" placeholder="First name" className={inputClass} />
+            <input name="last_name" placeholder="Last name" className={inputClass} />
+            <input name="username" placeholder="Username" className={inputClass} />
+            <input name="email" placeholder="Email" className={inputClass} />
 
             <input
                 type="date"
                 name="date_of_birth"
-                className="p-2 rounded bg-[#2F4F3E] text-white"
+                className={inputClass}
                 max={new Date().toISOString().split("T")[0]}
             />
 
@@ -66,13 +52,13 @@ export default function SignUpForm() {
                 type="password"
                 name="password"
                 placeholder="Password"
-                className="p-2 rounded bg-[#2F4F3E] text-white"
+                className={inputClass}
             />
             <input
                 type="password"
                 name="re_password"
                 placeholder="Confirm password"
-                className="p-2 rounded bg-[#2F4F3E] text-white"
+                className={inputClass}
             />
 
             {error && (
