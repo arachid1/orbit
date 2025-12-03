@@ -26,6 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const router = useRouter()
     const API_URL = process.env.NEXT_PUBLIC_API_URL
 
+    console.log(API_URL)
     // 🔄 Restore session on load (reads cookies)
     useEffect(() => {
         async function checkSession() {
