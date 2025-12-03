@@ -22,17 +22,16 @@ services:
     
   orbit_frontend:
     container_name: orbit_frontend
-    # build: ./orbit_frontend
     build:
       context: .
       dockerfile: orbit_frontend/Dockerfile.local
-    command: node server.mjs
+    command: npm run dev
     env_file: ./orbit_frontend/.env.local
     environment:
       - NODE_OPTIONS=--max-old-space-size=8192
     volumes:
       - ./orbit_frontend:/app   
-      - ./shared_frontend:/shared_frontend
+      - ./shared_frontend:/app/shared_frontend
       - /app/node_modules       # avoid overwriting node_modules
       - ./certs:/certs
     ports:
@@ -49,7 +48,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./nginx/orbit.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/orbit.local.conf:/etc/nginx/conf.d/default.conf:ro
       - ./orbit_backend/media:/app/media
       - ./orbit_backend/static:/app/static
       - ./certs:/certs
@@ -80,14 +79,14 @@ services:
       context: .
       dockerfile: novaword/novaword_frontend/Dockerfile.local
     container_name: novaword_frontend
-    command: node server.mjs
+    command: npm run dev
     ports:
       - "3001:3000"
     env_file: ./novaword/novaword_frontend/.env.local
     volumes:
       - ./novaword/novaword_frontend:/app
       - /app/node_modules 
-      - ./novaword/certs:/certs:ro
+      - ./certs:/certs:ro
       - ./shared_frontend:/shared_frontend
     networks:
       - orbitnet
